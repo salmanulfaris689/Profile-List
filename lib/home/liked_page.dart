@@ -1,8 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LikedModel {
-  LikedModel({this.id, this.name,});
+  LikedModel({
+    this.id,
+    this.name,
+  });
   int? id;
   String? name;
 }
@@ -16,55 +21,131 @@ class Likespag extends StatefulWidget {
   _LikespagState createState() => _LikespagState();
 }
 
-class _LikespagState extends State<Likespag> {
-  /*Future<Profilemodel?> getUserData() async {
-    var url = Uri.parse("https://dummyapi.io/data/v1/user?page=1&limit=100");
-    var response =
-        await http.get(url, headers: {"app-id": "61855d9e2b97e51240f9f492"});
-    if (response.statusCode == 200) {
-      return Profilemodel.fromJson(jsonDecode(response.body));
-    } else {
-      print(response.body);
-    }
-  }*/
+class _LikespagState extends State<Likespag> with TickerProviderStateMixin {
+  List<Color> colorList = [
+    const Color(0xffD23756),
+    const Color(0xff410D75),
+    const Color(0xffD23756),
+    const Color(0xff050340),
+    const Color(0xffD23756),
+  ];
+  List<Alignment> alignmentList = [Alignment.topCenter, Alignment.bottomCenter];
+  int index = 0;
+  Color bottomColor = const Color(0xffD23756);
+  Color topColor = const Color(0xff410D75);
+  Alignment begin = Alignment.bottomCenter;
+  Alignment end = Alignment.topCenter;
 
-  /* @override
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    getUserData();
-  }*/
+    Timer(
+      const Duration(microseconds: 0),
+      () {
+        setState(
+          () {
+            bottomColor = const Color(0xff33267C);
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.cyan[100],
-      appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
-          ),
+    return AnimatedContainer(
+      duration: const Duration(seconds: 2),
+      onEnd: () {
+        setState(
+          () {
+            index = index + 1;
+            bottomColor = colorList[index % colorList.length];
+            topColor = colorList[(index + 1) % colorList.length];
+          },
+        );
+      },
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: begin,
+          end: end,
+          colors: [bottomColor, topColor],
         ),
-        title: const Text(
-          "Liked Profiles",
-          style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 5),
-        ),
-        backgroundColor: Colors.cyan[400],
-        centerTitle: true,
-        elevation: 0,
       ),
-      body:  ListView.builder(
-          itemCount: widget.liked!.length,
-          itemBuilder: (context,index) {
+      child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(30),
+              ),
+            ),
+            title: const Text(
+              "Liked Profiles",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 5),
+            ),
+            backgroundColor: Colors.transparent,
+            centerTitle: true,
+            elevation: 0,
+          ),
+          body: ListView.builder(
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(16.0),
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              itemCount: widget.liked!.length,
+              itemBuilder: (context, index) {
+            return Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              height: 150,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 40,
+                        spreadRadius: 5),
+                  ]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.grey[300],
+                          radius: 65,
+                          backgroundImage: const NetworkImage(""),
+                        ),
+                      ],
+                    ),
+                  ),
 
-            return SizedBox(
-                height: 20,
-                child: Text(widget.liked![index]));
-          }
-      )
+                  Padding(
+                    padding: const EdgeInsets.only(top: 35,left: 20),
+                    child: Row(
+                      crossAxisAlignment:
+                      CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(widget.liked![index],style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          })
+          
+          ),
     );
   }
 }

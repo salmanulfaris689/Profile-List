@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pillsbee/Home/Home_page.dart';
+import 'package:pillsbee/home/splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:  const Homepag(),
+      home:  Splash(),
     );
   }
 }
