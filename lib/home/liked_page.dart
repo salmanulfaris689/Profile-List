@@ -97,55 +97,53 @@ class _LikespagState extends State<Likespag> with TickerProviderStateMixin {
                   parent: AlwaysScrollableScrollPhysics()),
               itemCount: widget.liked!.length,
               itemBuilder: (context, index) {
-            return Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              height: 150,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 40,
-                        spreadRadius: 5),
-                  ]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.grey[300],
-                          radius: 65,
-                          backgroundImage: const NetworkImage(""),
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  height: 80,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 40,
+                            spreadRadius: 5),
+                      ]),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            /*CircleAvatar(
+                              backgroundColor: Colors.grey[300],
+                              radius: 65,
+                              backgroundImage: widget.pro![index],
+                            ),*/
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.only(top: 35,left: 20),
-                    child: Row(
-                      crossAxisAlignment:
-                      CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(widget.liked![index],style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15, left: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                widget.liked![index],
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
-          })
-          
-          ),
+                );
+              })),
     );
   }
 }

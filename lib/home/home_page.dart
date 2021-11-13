@@ -52,10 +52,8 @@ class _HomepagState extends State<Homepag> with TickerProviderStateMixin {
     var response =
         await http.get(url, headers: {"app-id": "61855d9e2b97e51240f9f492"});
     if (response.statusCode == 200) {
-      //print("ddd");
       return Homemodel.fromJson(jsonDecode(response.body));
     } else {
-      // print(response.body);
     }
   }
 
@@ -115,7 +113,7 @@ class _HomepagState extends State<Homepag> with TickerProviderStateMixin {
                 },
                 icon: const Icon(Icons.favorite),
                 iconSize: 35,
-                color: Colors.pink,
+                color: Colors.white,
                 alignment: Alignment.center,
               ),
             ),
