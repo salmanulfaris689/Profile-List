@@ -1,6 +1,6 @@
-# pillsbee
+#  Task by pillsbee
 
-A new Flutter project.
+Basic profile listing flutter applications
 
 ## Getting Started
 
